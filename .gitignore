@@ -1,0 +1,16 @@
+Articles/*
+databases/.DS_Store
+databases/mutation_gene_bmi/*
+databases/mutations/.DS_Store
+databases/mutations/endo_mut_bedtools_ann.bed
+databases/mutations/endo_mut_bedtools_ann.vcf
+databases/mutations/Endometrial_mutations.txt
+databases/mutations/mutations_context.txt
+databases/TCGA_MAFs/*
+output/*
+Results/*
+scripts/.DS_Store
+scripts/.Rhistory
+scripts/SigProfiler/*
+scripts/Data Processing/bedtools_annotation.py
+.DS_Store
