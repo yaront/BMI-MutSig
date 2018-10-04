@@ -14,29 +14,58 @@ Created on Tue Oct  2 23:45:23 2018
 import numpy as np
 import pandas as pd
 from sklearn.decomposition import NMF
+from matplotlib import pylab as plt
+import matplotlib.cm as cm
 
 #%% Reading the data
 
-mut_cat = pd.read_table('./../../databases/mutation_signatures/Endometrial_mutational_catalog.txt', index_col = 0)
+mut_cat = pd.read_table('./../../databases/mutation_signatures/Endometrial_mutational_catalog_bmi_sort.txt', index_col = 0)
 mut_cat_mat = np.asmatrix(mut_cat)
 
 
 #%% Dimension reduction
 
-n_comp = 4
+percent_remove = 0.3
 
-X = np.copy(mut_cat_mat)
+mut_freq = mut_cat.sum(axis=1)/mut_cat.sum().sum()
+mut_freq = mut_freq.sort_values()
+
+low_mut_type = list(mut_freq[np.cumsum(mut_freq) < percent_remove].index)
+mut_cat_high = mut_cat.drop(low_mut_type)
+mut_cat_high_mat = np.asmatrix(mut_cat_high)
+
+
+#%% Bootstrap
+
+
+
+n_comp = 2
+
+X = np.copy(mut_cat_high_mat)
 nmf = NMF(n_components=n_comp)
 
 W = nmf.fit_transform(X)
 H = nmf.components_
 
+mut_sig = W.argmax(axis = 1)
+mut_clust_mat = X[mut_sig.argsort()]
+mut_clust = W[mut_sig.argsort()]
+pat_sig = H.argmax(axis = 0)
+pat_clust_mat = X[:,pat_sig.argsort()]
+pat_clust = H[:,pat_sig.argsort()]
 
-res_labels = W.argmax(axis = 1)
-res_clust_mat = X[res_labels.argsort()]
-w_clust = W[res_labels.argsort()]
-kin_labels = H.argmax(axis = 0)
-kin_clust_mat = X[:,kin_labels.argsort()]
-h_clust = H[:,kin_labels.argsort()]
+#plt.figure()
+#plt.imshow(W,cmap = cm.gray_r)
+#plt.figure()
+#plt.imshow(H,cmap = cm.gray_r)
+#plt.figure()
+#plt.imshow(mut_clust_mat,cmap = cm.gray_r)
+#plt.figure()
+#plt.imshow(pat_clust_mat,cmap = cm.gray_r)
 
-kin_labels
+
+#%%
+
+
+
+
