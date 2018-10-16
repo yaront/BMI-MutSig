@@ -27,8 +27,8 @@ tumor = 'UCEC'
 
 print "Starting: " + tumor
 
-mut_data = pd.read_table('./../databases/TCGA_MAFs/' + tumor + '.maf', sep = '\t')
-bmi_data = pd.read_table('./../databases/information/TCGA_bmi_data.txt', sep = '\t')
+mut_data = pd.read_table('./../../..//databases/Endometrial/TCGA_MAFs/' + tumor + '.maf', sep = '\t')
+bmi_data = pd.read_table('./../../../databases/Endometrial/information/TCGA_bmi_data.txt', sep = '\t')
 pat_bmi = bmi_data[bmi_data['bmi'] != '--']
 pat_bmi = pat_bmi[(18.5 < pd.to_numeric(pat_bmi['bmi'])) & (pd.to_numeric(pat_bmi['bmi']) < 90)]
 
