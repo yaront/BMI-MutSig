@@ -14,18 +14,18 @@ Created on Tue Oct  2 23:45:23 2018
 import numpy as np
 import pandas as pd
 from sklearn.decomposition import NMF
-from matplotlib import pylab as plt
+from matplotlib import pyplot as plt
 import matplotlib.cm as cm
 
 #%% Reading the data
 
-mut_cat = pd.read_table('./../../databases/mutation_signatures/Endometrial_mutational_catalog_bmi_sort.txt', index_col = 0)
+mut_cat = pd.read_table('./../../../databases/Endometrial/mutation_signatures/Endometrial_mutational_catalog_bmi_sort.txt', index_col = 0)
 mut_cat_mat = np.asmatrix(mut_cat)
 
 
 #%% Dimension reduction
 
-percent_remove = 0.1
+percent_remove = 0
 
 mut_freq = mut_cat.sum(axis=1)/mut_cat.sum().sum()
 mut_freq = mut_freq.sort_values()
@@ -39,11 +39,13 @@ mut_cat_high_mat = np.asmatrix(mut_cat_high)
 
 
 
-n_comp = 10
+n_comp = 4
+row_plt = 4
+col_plt = 1
 
-#X = np.copy(mut_cat_high_mat)
+X = np.copy(mut_cat_high_mat)
 #X = mut_cat_high_mat[:,range(50) + range(190,240)]
-X = mut_cat_high_mat.astype(np.float) / mut_cat_high_mat.sum(axis=0)
+#X = mut_cat_high_mat.astype(np.float) / mut_cat_high_mat.sum(axis=0)
 X = X[:,range(50) + range(190,240)]
 nmf = NMF(n_components=n_comp)
 
@@ -70,6 +72,12 @@ pat_sig
 
 #%%
 
-
+plt.figure()
+plt.subplot(row_plt,col_plt,1)
+plt.bar(range(96), W[:,0])
+for i in range(1,W.shape[1]):
+    plt.subplot(row_plt,col_plt,i+1)
+    plt.bar(range(96),W[:,i])
+plt.suptitle('Mutational Signatures; n = ' + str(n_comp))
 
 
