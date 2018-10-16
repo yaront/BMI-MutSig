@@ -39,14 +39,14 @@ mut_cat_high_mat = np.asmatrix(mut_cat_high)
 
 
 
-n_comp = 4
-row_plt = 4
-col_plt = 1
+n_comp = 10
+row_plt = 5
+col_plt = 2
 
 X = np.copy(mut_cat_high_mat)
 #X = mut_cat_high_mat[:,range(50) + range(190,240)]
 #X = mut_cat_high_mat.astype(np.float) / mut_cat_high_mat.sum(axis=0)
-X = X[:,range(50) + range(190,240)]
+#X = X[:,range(50) + range(190,240)]
 nmf = NMF(n_components=n_comp)
 
 W = nmf.fit_transform(X)
