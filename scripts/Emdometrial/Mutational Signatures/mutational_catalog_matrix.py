@@ -17,8 +17,8 @@ import pandas as pd
 #%% Creating the mutational data
 
 print "Reading data..."
-mut_data = pd.read_csv('./../../databases/mutations/Endometrial_SNP_mutations_context.txt', sep = '\t')
-bmi_data = pd.read_table('./../../databases/information/TCGA_bmi_data.txt', sep = '\t')
+mut_data = pd.read_csv('./../../../databases/Endometrial/mutations/Endometrial_SNP_mutations_context.txt', sep = '\t')
+bmi_data = pd.read_table('./../../../databases/Endometrial/information/TCGA_bmi_data.txt', sep = '\t')
 
 pat_bmi = bmi_data[bmi_data['bmi'] != '--']
 pat_bmi = pat_bmi[(18.5 < pd.to_numeric(pat_bmi['bmi'])) & (pd.to_numeric(pat_bmi['bmi']) < 90)]
@@ -34,7 +34,7 @@ sam_bmi = []
 base_sub_type = []
 for i,s in pat_mut.iterrows():
     sam_barcode = '-'.join(s['Tumor_Sample_Barcode'].split('-')[:3])
-    sam_bmi.append(int(pat_bmi[pat_bmi['submitter_id'] == sam_barcode]['bmi'].values))
+    sam_bmi.append(int(pat_bmi[pat_bmi['submitter_id'] == sam_barcode]['bmi'].values.astype(int)))
     if (((s['Reference_Allele'] == 'C') & (s['Tumor_Seq_Allele2'] == 'A')) | ((s['Reference_Allele'] == 'G') & (s['Tumor_Seq_Allele2'] == 'T'))):
         base_sub_type.append('C:G>A:T')
     elif (((s['Reference_Allele'] == 'C') & (s['Tumor_Seq_Allele2'] == 'G')) | ((s['Reference_Allele'] == 'G') & (s['Tumor_Seq_Allele2'] == 'C'))):
