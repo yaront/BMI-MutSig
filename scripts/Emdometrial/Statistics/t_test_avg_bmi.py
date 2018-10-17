@@ -18,7 +18,7 @@ from itertools import islice
 
 #%%
 
-gene_bmi_mut = pd.read_table('./../databases/mutation_bmi/UCEC_bmi_gene_mut.txt', sep = '\t', index_col = 0)
+gene_bmi_mut = pd.read_table('./../../../databases/Endometrial/mutation_gene_bmi/UCEC_bmi_gene_mut.txt', sep = '\t', index_col = 0)
 
 p_value = []
 wt_avg = []
