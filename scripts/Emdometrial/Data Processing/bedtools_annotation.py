@@ -21,7 +21,7 @@ import pandas as pd
 chr_list = list(range(1,23)) + ['MT','X']
 chr_list = [str(x) for x in chr_list]
 
-mut_full = pd.read_table('./../../databases/mutations/Endometrial_mutations.txt', sep = '\t')
+mut_full = pd.read_table('./../../../databases/Endometrial/mutations/Endometrial_mutations.txt', sep = '\t')
 mut_filtered = mut_full[mut_full['Variant_Type'] == 'SNP']
 mut_filtered = mut_filtered[mut_filtered['Chromosome'].isin(chr_list)]
 mut_filtered['Chromosome'] = mut_filtered['Chromosome'].replace(to_replace='MT', value='M')
