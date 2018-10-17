@@ -13,7 +13,6 @@ Created on Thu Jul 26 20:42:43 2018
 
 import numpy as np
 import pandas as pd
-import sys
 
 #%%
 
