@@ -23,6 +23,7 @@ rna_seq = pd.read_csv('/Users/tomer/Google Drive/PhD/Thesis/Mutation Signature/d
 clinical_data = clinical_data[~clinical_data.index.duplicated(keep='first')]
 
 
+
 #%%
 
 bmi = []
