@@ -9,6 +9,7 @@ databases/Endometrial/TCGA_MAFs/*
 databases/Endometrial/mutation_gene_bmi/*
 output/*
 Results/*
+figures/*
 scripts/.DS_Store
 scripts/.Rhistory
 scripts/SigProfiler/*

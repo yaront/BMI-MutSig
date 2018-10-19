@@ -43,6 +43,8 @@ n_comp = 10
 row_plt = 5
 col_plt = 2
 
+#for n_comp in range (10,1,-1):
+
 X = np.copy(mut_cat_high_mat)
 #X = mut_cat_high_mat[:,range(50) + range(190,240)]
 #X = mut_cat_high_mat.astype(np.float) / mut_cat_high_mat.sum(axis=0)
@@ -59,8 +61,8 @@ pat_sig = H.argmax(axis = 0)
 pat_clust_mat = X[:,pat_sig.argsort()]
 pat_clust = H[:,pat_sig.argsort()]
 
-plt.figure()
-plt.imshow(W,cmap = cm.gray_r)
+#    plt.figure()
+#    plt.imshow(W,cmap = cm.gray_r)
 plt.figure()
 plt.imshow(H,cmap = cm.gray_r)
 #plt.figure()
