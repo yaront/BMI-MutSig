@@ -81,3 +81,60 @@ for i in range(1,W.shape[1]):
     plt.suptitle('Mutational Signatures; n = ' + str(n_comp))
 
 
+
+
+
+
+
+#%%
+
+n_comp = 3
+row_plt = 3
+col_plt = 2
+
+#for n_comp in range(2,6):
+
+X = np.copy(mut_gene_high_mat)
+#X = mut_gene_high_mat[:,range(50) + range(188,238)]
+pca = PCA(n_components=n_comp)
+
+W = pca.fit_transform(X)
+H = pca.components_
+
+mut_sig = W.argmax(axis = 1)
+mut_clust_mat = X[mut_sig.argsort()]
+mut_clust = W[mut_sig.argsort()]
+pat_sig = H.argmax(axis = 0)
+pat_clust_mat = X[:,pat_sig.argsort()]
+pat_clust = H[:,pat_sig.argsort()]
+
+#plt.figure()
+#plt.imshow(W,cmap = cm.gray_r)
+#plt.figure()
+#plt.imshow(H,cmap = cm.gray_r)
+#plt.figure()
+#plt.imshow(mut_clust_mat,cmap = cm.gray_r)
+#plt.figure()
+#plt.imshow(pat_clust_mat,cmap = cm.gray_r)
+
+
+
+#%%
+
+
+pat_col = gene_bmi_mut.iloc[0,:-1].apply(lambda x: '1' if x<=25 else ('2' if x<=30 else '3'))
+
+plt.figure()
+ax = plt.axes(projection='3d')
+ax.scatter3D(W[:,0], W[:,1], W[:,2], c=pat_col.values, cmap='viridis')
+plt.xlabel('component 1')
+plt.ylabel('component 2')
+
+
+
+
+
+
+
+
+
