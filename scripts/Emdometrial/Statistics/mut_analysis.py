@@ -24,7 +24,7 @@ tumor = 'UCEC'
 
 #%% Reading data
 
-print "Starting: " + tumor
+print("Starting: " + tumor)
 
 mut_data = pd.read_table('./../../../databases/Endometrial/TCGA_MAFs/' + tumor + '.maf', sep = '\t')
 bmi_data = pd.read_table('./../../../databases/Endometrial/information/TCGA_bmi_data.txt', sep = '\t')
@@ -52,7 +52,7 @@ gene_bmi_mut = gene_bmi_mut[gene_bmi_mut['Total_Mutations'] < 3000]
 
 #%% Assigning mutations per gene per patient
 
-print "Calculating mutations for " + tumor
+print("Calculating mutations for " + tumor)
 
 for g in np.unique(pat_mut['Hugo_Symbol']):
     gene_mut = pat_mut[pat_mut['Hugo_Symbol'] == g]
@@ -68,7 +68,7 @@ norm_gene_bmi_mut = []
 
 #%% Finding the slope
 
-print "Calculating slope for " + tumor
+print("Calculating slope for " + tumor)
 
 inds = {bmi: ind for ind,bmi in enumerate(set(pd.to_numeric(gene_bmi_mut.loc['BMI',:])))}
 bmi_ind = [inds[bmi] for bmi in pd.to_numeric(gene_bmi_mut.loc['BMI',:])]
@@ -77,8 +77,8 @@ slope = []
 for i,j in gene_bmi_mut.iloc[2:,:].iterrows():
     norm_mut = pd.to_numeric(j) / pd.to_numeric(gene_bmi_mut.loc['Total_Mutations'])
     norm_gene_bmi_mut.append(norm_mut)
-    weight_mut = np.bincount(np.array(bmi_ind),weights=map(float,norm_mut.values)) / np.bincount(np.array(bmi_ind))
-    slope.append(np.polyfit(range(len(weight_mut)), weight_mut,1)[0])
+    weight_mut = np.bincount(np.array(bmi_ind),weights=list(map(float,norm_mut.values))) / np.bincount(np.array(bmi_ind))
+    slope.append(np.polyfit(list(range(len(weight_mut))), weight_mut,1)[0])
 
 norm_gene_bmi_mut = pd.DataFrame(norm_gene_bmi_mut)
 norm_gene_bmi_mut = pd.concat([gene_bmi_mut.loc[['BMI','Total_Mutations'],:],norm_gene_bmi_mut])
@@ -95,7 +95,7 @@ norm_gene_bmi_mut.loc[['BMI','Total_Mutations'],'Slope'] = '-'
 
 #%% Writing the data
 
-print "Writing " + tumor
+print("Writing " + tumor)
 
 gene_bmi_mut.to_csv('./../output/' + tumor + '_bmi_gene_mut.txt', header = True, index = True, sep = '\t')
 norm_gene_bmi_mut.to_csv('./../output/' + tumor + '_bmi_gene_mut_norm.txt', header = True, index = True, sep = '\t')
@@ -105,7 +105,7 @@ gene_bmi_mut.to_excel(writer, sheet_name = tumor + '_binary')
 norm_gene_bmi_mut.to_excel(writer, sheet_name = tumor + '_norm')
 writer.save()
 
-print "Done: " + tumor
+print("Done: " + tumor)
 
 
 

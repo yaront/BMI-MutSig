@@ -16,7 +16,7 @@ import pandas as pd
 
 #%% Creating the mutational data
 
-print "Reading data..."
+print("Reading data...")
 mut_data = pd.read_csv('./../../../databases/Endometrial/mutations/Endometrial_SNP_mutations_context.txt', sep = '\t')
 bmi_data = pd.read_table('./../../../databases/Endometrial/information/TCGA_bmi_data.txt', sep = '\t')
 
@@ -29,7 +29,7 @@ patients = np.sort(patients)
 pat_bmi = pat_bmi[[(x in patients) for x in pat_bmi['submitter_id'].values]].sort_values(by = ['bmi'])
 pat_mut = mut_data[[(x in patients) for x in ['-'.join(x.split('-')[0:3]) for x in mut_data['Tumor_Sample_Barcode']]]]
 
-print "Assigning BMI and context..."
+print("Assigning BMI and context...")
 sam_bmi = []
 base_sub_type = []
 for i,s in pat_mut.iterrows():
@@ -63,14 +63,14 @@ pat_mut = pat_mut.sort_values(by=['BMI','Tumor_Sample_Barcode','Reference_Allele
 
 #%% GEnerating the mutational catalog data
 
-print "Calculating catalog matrix..."
+print("Calculating catalog matrix...")
 mut_cat = pd.DataFrame(0, index=mut_con_type, columns=pd.unique(pat_mut['Tumor_Sample_Barcode']))
 for i,s in pat_mut.iterrows():
     mut_cat.loc[s['Full_Context_Type'],s['Tumor_Sample_Barcode']]+=1
 
 #%% Saving data
 
-print "Writing data..."
+print("Writing data...")
 mut_cat.to_csv('./../../output/Endometrial_mutational_catalog_bmi_sort.txt', sep = '\t')
 
 

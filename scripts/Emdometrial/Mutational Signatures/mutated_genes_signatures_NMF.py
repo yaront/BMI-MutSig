@@ -45,7 +45,7 @@ col_plt = 2
 #for n_comp in range(2,6):
 
 #X = np.copy(mut_gene_high_mat)
-X = mut_gene_high_mat[:,range(50) + range(188,238)]
+X = mut_gene_high_mat[:,list(range(50)) + list(range(188,238))]
 nmf = NMF(n_components=n_comp)
 
 W = nmf.fit_transform(X)
@@ -67,17 +67,17 @@ plt.imshow(H,cmap = cm.gray_r)
 #plt.figure()
 #plt.imshow(pat_clust_mat,cmap = cm.gray_r)
 
-print gene_bmi_mut_high.index[W[:,0].argsort()[::-1][:5]]
-print pat_sig
+print(gene_bmi_mut_high.index[W[:,0].argsort()[::-1][:5]])
+print(pat_sig)
 
 #%%
 
 plt.figure()
 plt.subplot(row_plt,col_plt,1)
-plt.bar(range(17740), W[:,0])
+plt.bar(list(range(17740)), W[:,0])
 for i in range(1,W.shape[1]):
     plt.subplot(row_plt,col_plt,i+1)
-    plt.bar(range(17740),W[:,i])
+    plt.bar(list(range(17740)),W[:,i])
     plt.suptitle('Mutational Signatures; n = ' + str(n_comp))
 
 

@@ -76,10 +76,10 @@ pat_sig
 
 plt.figure()
 plt.subplot(row_plt,col_plt,1)
-plt.bar(range(96), W[:,0])
+plt.bar(list(range(96)), W[:,0])
 for i in range(1,W.shape[1]):
     plt.subplot(row_plt,col_plt,i+1)
-    plt.bar(range(96),W[:,i])
+    plt.bar(list(range(96)),W[:,i])
 plt.suptitle('Mutational Signatures; n = ' + str(n_comp))
 
 

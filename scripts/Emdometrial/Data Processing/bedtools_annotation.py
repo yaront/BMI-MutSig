@@ -11,7 +11,7 @@ Created on Mon Oct  1 16:13:37 2018
 # # Creating an annotation file for bedtools
 # =============================================================================
 
-print "Starting..."
+print("Starting...")
 
 import numpy as np
 import pandas as pd
@@ -36,6 +36,6 @@ bedtools_ann.columns = ['chrom','chromStart','chromEnd','name']
 
 bedtools_ann.to_csv('../../output/endo_mut_bedtools_ann.bed',sep = '\t',index = False, header = False)
 
-print "Done."
+print("Done.")
 
 
