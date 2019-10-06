@@ -1,12 +1,5 @@
 Articles/*
-databases/.DS_Store
-databases/Endometrial/mutations/.DS_Store
-databases/Endometrial/mutations/endo_mut_bedtools_ann.bed
-databases/Endometrial/mutations/endo_mut_bedtools_ann.vcf
-databases/Endometrial/mutations/Endometrial_mutations.txt
-databases/Endometrial/mutations/mutations_context.txt
-databases/Endometrial/TCGA_MAFs/*
-databases/Endometrial/mutation_gene_bmi/*
+databases/*
 output/*
 Results/*
 figures/*
@@ -14,6 +7,3 @@ scripts/.DS_Store
 scripts/.Rhistory
 scripts/SigProfiler/*
 .DS_Store
-databases/Endometrial/information/RNASeq-TCGA-UCEC_FPKM_020217.txt.summarise.xlsx
-databases/Endometrial/information/endometrial_rna_seq_with_clinical_data.txt
-databases/Endometrial/information/RNASeq-TCGA-UCEC_FPKM_020217.txt.summarise.csv
